@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({
 mongoose.Promise = Promise;
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/scrapple");
+mongoose.connect(" mongodb://heroku_h64rmn1s:t3a2cp6himpkku8likqkc25ieu@ds135700.mlab.com:35700/heroku_h64rmn1s");
 var db = mongoose.connection;
 
 // Show any mongoose errors
