@@ -1,6 +1,6 @@
 # Scrapple
 
-# HW - {News Article Commenter}
+# News Article Commenter
 
 ## Live Link 
  - https://frozen-chamber-97457.herokuapp.com/
