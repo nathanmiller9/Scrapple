@@ -4,46 +4,27 @@ var logger = require("morgan");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 // set port
-var port = process.env.PORT || 8080
-
-app.use(express.static(path.join(__dirname, 'public')));
-
-/* Showing Mongoose's "Populated" Method (18.3.8)
- * INSTRUCTOR ONLY
- * =============================================== */
-
-// Dependencies
-
-var methodOverride = require("method-override");
-
+var port = process.env.PORT || 8080;
 
 // Requiring our Note and Article models
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
-// Our scraping tools
-var request = require("request");
-var cheerio = require("cheerio");
-// Set mongoose to leverage built in JavaScript ES6 Promises
-mongoose.Promise = Promise;
 
 // Initialize Express
 var app = express();
 
 // Set Handlebars.
-var exphbs = require("express-handlebars");
+var exphbs = require('express-handlebars');
+app.engine('handlebars', exphbs({
+    defaultLayout: 'main'
+}));
+app.set('view engine', 'handlebars');
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-
-app.set("view engine", "handlebars");
-
-
-
-
-// Serve static content for the app from the "public" directory in the application directory.
-
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Use morgan and body parser with our app
 app.use(logger("dev"));
+
 app.use(bodyParser.urlencoded({
   extended: false
 }));
@@ -51,13 +32,7 @@ app.use(bodyParser.urlencoded({
 // Make public a static dir
 // Serve static content for the app from the "public" directory in the application directory.
 
-// Override with POST having ?_method=DELETE
-app.use(methodOverride("_method"));
-
-
-
-
-
+mongoose.Promise = Promise;
 
 // Database configuration with mongoose
 mongoose.connect("mongodb://localhost/scrapple");
@@ -73,17 +48,16 @@ db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
-
 // Routes
 // ======
 // Import routes and give the server access to them.
-var routes = require("./controllers/scrappleController.js");
+var scrappleController = require("./controllers/scrappleController.js");
 
-app.use("/", routes);
-
-
+app.use("/", scrappleController);
 
 
 app.listen(port, function() {
 	console.log("app running");
 })
+
+module.exports = app;

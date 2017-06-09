@@ -2,6 +2,10 @@ var express = require("express");
 
 var router = express.Router();
 
+// Our scraping tools
+var request = require("request");
+var cheerio = require("cheerio");
+
 // Requiring our Note and Article models
 var Note = require("../models/Note.js");
 var Article = require("../models/Article.js");
