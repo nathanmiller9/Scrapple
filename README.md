@@ -9,7 +9,7 @@
 
 ## Requirements
 
-- Create a web app that lets users leave comments on the latest news using Cheerio to scrape for articles and Mongoose to handle articles and user comments.
+- Created a web application that lets users leave comments on the latest news using Cheerio to scrape for articles and Mongoose to handle articles and user comments.
 
 ## Technologies Used
 - Dependencies: 
